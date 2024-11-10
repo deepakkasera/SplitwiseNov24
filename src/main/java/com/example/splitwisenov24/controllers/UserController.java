@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
     public RegisterUserResponseDto registerUser(RegisterUserRequestDto requestDto) {
+        System.out.println("Register user command");
         return null;
     }
 

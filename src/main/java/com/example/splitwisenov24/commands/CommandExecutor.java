@@ -10,19 +10,23 @@ public class CommandExecutor {
     private AddMemberCommand addMemberCommand;
     private AddGroupCommand addGroupCommand;
     private SettleUpUserCommand settleUpUserCommand;
+    private RegisterUserCommand registerUserCommand;
 
-    private List<Command> commands = new ArrayList<>();
+    private static List<Command> commands = new ArrayList<>();
 
     public CommandExecutor(AddMemberCommand addMemberCommand,
                            AddGroupCommand addGroupCommand,
-                           SettleUpUserCommand settleUpUserCommand) {
+                           SettleUpUserCommand settleUpUserCommand,
+                           RegisterUserCommand registerUserCommand) {
         this.addMemberCommand = addMemberCommand;
         this.addGroupCommand = addGroupCommand;
         this.settleUpUserCommand = settleUpUserCommand;
+        this.registerUserCommand = registerUserCommand;
 
         commands.add(addMemberCommand);
         commands.add(addGroupCommand);
         commands.add(settleUpUserCommand);
+        commands.add(registerUserCommand);
     }
 
     public void addCommand(Command command) {
@@ -35,9 +39,10 @@ public class CommandExecutor {
         );
     }
 
-    public void execute(String input) {
+    public static void execute(String input) {
         for (Command command : commands) {
             if (command.matches(input)) {
+                System.out.println("Executing..." + command);
                 command.execute(input);
                 break;
             }
